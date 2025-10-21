@@ -1,11 +1,6 @@
 name: E2E Tests
 on:
   workflow_dispatch:
-    inputs:
-      base_url:
-        description: 'Escolha o ambiente de testes de sua preferencia (local, homolog, production)'
-        required: true
-        default: 'http://localhost:3000'
 
 jobs:
   tests:
@@ -18,8 +13,8 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           start: npm start
-          command: npx cross-env BASE_URL=${{ github.event.inputs.base_url }} npx cypress run --browser=chrome
-     
+          browser: chrome
+           
       - name: Upload Screenshots
         uses: actions/upload-artifact@v4
         if: always()
