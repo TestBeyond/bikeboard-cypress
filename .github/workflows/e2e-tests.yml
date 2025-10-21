@@ -13,19 +13,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-      
-      - name: Install cross-env
-        run: npm install -g cross-env
-      
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
           start: npm start
-          command: cross-env BASE_URL=${{ github.event.inputs.base_url }} npx cypress run
+          command: npx cross-env BASE_URL=${{ github.event.inputs.base_url }} npx cypress run
           browser: chrome
      
       - name: Upload Screenshots
